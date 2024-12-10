@@ -14,9 +14,11 @@ end CLA_16Bit;
 
 architecture Structural of CLA_16Bit is
     -- Internal signals
-    signal C       : STD_LOGIC_VECTOR(4 downto 0); -- Carry signals between blocks
-    signal P_group : STD_LOGIC_VECTOR(3 downto 0); -- Propagate signals from CLA_4Bit blocks
-    signal G_group : STD_LOGIC_VECTOR(3 downto 0); -- Generate signals from CLA_4Bit blocks
+    signal P : STD_LOGIC_VECTOR(3 downto 0); -- Propagate signals
+    signal G : STD_LOGIC_VECTOR(3 downto 0); -- Generate signals
+    signal C : STD_LOGIC_VECTOR(4 downto 0); -- Carry signals between blocks
+    signal P_group : STD_LOGIC;              -- Propagate signals from CLA_4Bit blocks
+    signal G_group : STD_LOGIC;              -- Generate signals from CLA_4Bit blocks
 
     -- Carry-out signals from the TAU
     signal TAU_C_out : STD_LOGIC_VECTOR(3 downto 0);
@@ -25,15 +27,15 @@ begin
     C(0) <= Cin;
 
     -- Instantiate CLA_4Bit blocks
-    gen_cla: for i in 0 to 3 generate
+    cla_inst: for i in 0 to 3 generate
         cla_4bit: entity work.CLA_4Bit
             port map (
                 A       => A((4 * i + 3) downto (4 * i)),
                 B       => B((4 * i + 3) downto (4 * i)),
                 Cin     => C(i),
                 S       => S((4 * i + 3) downto (4 * i)),
-                P_group => P_group(i),
-                G_group => G_group(i),
+                P_group => P(i),
+                G_group => G(i),
                 Cout    => open
             );
     end generate;
@@ -41,11 +43,11 @@ begin
     -- Instantiate the TAU
     tau_unit: entity work.TAU
         port map (
-            P       => P_group,
-            G       => G_group,
+            P       => P,
+            G       => G,
             Cin     => C(0),
-            P_group => open,    -- Not needed in this design
-            G_group => open,    -- Not needed in this design
+            P_group => P_group,
+            G_group => G_group,
             C_out   => TAU_C_out
         );
 
