@@ -3,12 +3,12 @@ use IEEE.STD_LOGIC_1164.ALL;
 
 entity TAU is
     Port (
-        P      : in  STD_LOGIC_VECTOR(3 downto 0); -- Propagate signals
-        G      : in  STD_LOGIC_VECTOR(3 downto 0); -- Generate signals
-        Cin    : in  STD_LOGIC;                    -- Carry-in
-        P_group: out STD_LOGIC;                    -- Group propagate
-        G_group: out STD_LOGIC;                    -- Group generate
-        C_out  : buffer STD_LOGIC_VECTOR(4 downto 1)  -- Carry outputs
+        P      : in  STD_LOGIC_VECTOR(3 downto 0);   -- Propagate signals
+        G      : in  STD_LOGIC_VECTOR(3 downto 0);   -- Generate signals
+        Cin    : in  STD_LOGIC;                      -- Carry-in
+        P_group: out STD_LOGIC;                      -- Group propagate
+        G_group: out STD_LOGIC;                      -- Group generate
+        C_out  : buffer STD_LOGIC_VECTOR(4 downto 1) -- Carry outputs
     );
 end TAU;
 
