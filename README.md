@@ -54,7 +54,7 @@ To work with this project, you will need:
 1. Clone the repository:
    ```bash
    git clone https://github.com/matei.b/VHDL_Adders.git
-   cd cla_adders
+   cd VHDL_Adders
    ```
 2. Open your preferred VHDL simulation tool.
 3. Compile the necessary VHDL files:
